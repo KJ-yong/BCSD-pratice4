@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             binding.textView.text = (binding.textView.text.toString().toInt()+1).toString()
         }
         binding.buttonRandom.setOnClickListener {
-            val notificationBuilder = NotificationCompat.Builder(this, "progressbar")
+            val notificationBuilder = NotificationCompat.Builder(this, "progressBar")
             notificationBuilder.setSmallIcon(R.drawable.ic_launcher_foreground)
             notificationBuilder.setContentTitle("프로그래스 바")
             notificationBuilder.setContentText("")
@@ -58,6 +58,12 @@ class MainActivity : AppCompatActivity() {
             NotificationManagerCompat.from(this).notify(100, notificationBuilder.build())
             setDataAtFragment(RandomFragment(),binding.textView.text.toString())
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.cancel(100)
     }
     private fun setFragment(fragment: RandomFragment){
         val transaction = supportFragmentManager.beginTransaction()

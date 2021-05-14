@@ -5,6 +5,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import com.example.bcsdpractice1.databinding.ActivityMainBinding
 import com.example.bcsdpractice1.databinding.FragmentRandomBinding
@@ -53,10 +55,10 @@ class RandomFragment : Fragment() {
         }
         binding.randomTextView.text = "Here is random number between 0 and "+num
         binding.textRandom.text = Random.nextInt(num?.toInt()?:0).toString()
+        binding.buttonExit.setOnClickListener {
+            (activity as MainActivity).finish()
+        }
         return binding.root//inflater.inflate(R.layout.fragment_random, container, false)
-    }
-    fun displayNotification(){
-
     }
 
     companion object {
